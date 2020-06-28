@@ -12,7 +12,7 @@ function throttle(f, t) {
 }
 
 class Slider {
-	constructor(options) {
+	constructor() {
 		const slider = this;
 		this.container = document.querySelector('.slider');
 		this.slides = document.querySelectorAll('.slider__slide');
