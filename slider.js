@@ -9,37 +9,36 @@ function throttle(f, t) {
 	}
 }
 
-class Slider {
-	constructor(options) {
-		const slider = this;
-		this.container = document.querySelector('.slider');
-		this.content = document.querySelector('.slider__content');
-		this.slides = document.querySelectorAll('.slider__slide');
-		if(!this.container || !this.content || this.slides.length === 0) {
-			console.warn('Invalid markup or no slides found')
+class Showcase {
+	constructor(el, options) {
+		if(!el) {
+			console.warn('No showcase element found');
 			return;
 		}
-
-		this.content.addEventListener('click', this.nextSlide.bind(slider));
-
-		// Prev and Next buttons
-		this.next = document.querySelector('.slider__next');
-		this.prev = document.querySelector('.slider__prev');
-
-		if(this.next && this.prev) {
-			this.next.addEventListener('click', this.nextSlide.bind(slider));
-			this.prev.addEventListener('click', this.prevSlide.bind(slider));
+		const _this = this;
+		this.el = el;
+		this.container = el.querySelector('.slider');
+		this.content = el.querySelector('.slider__content');
+		this.slides = el.querySelectorAll('.slider__slide');
+		if(!this.content || this.slides.length === 0) {
+			console.warn('Invalid markup or no slides found');
+			return;
 		}
-
 		this.xDown = null;
 		this.yDown = null;
-
 		this.activeSlideIndex = 0;
-
 		this.slides[this.activeSlideIndex].classList.add('active');
 
-		this.container.addEventListener('touchstart', throttle(this.handleTouchStart.bind(slider), 250));
-		this.container.addEventListener('touchmove', throttle(this.handleTouchMove.bind(slider), 250));
+		this.content.addEventListener('click', this.nextSlide.bind(_this));
+		this.el.addEventListener('touchstart', throttle(this.handleTouchStart.bind(_this), 250));
+		this.el.addEventListener('touchmove', throttle(this.handleTouchMove.bind(_this), 250));
+		this.next = el.querySelector('.slider__next');
+		this.prev = el.querySelector('.slider__prev');
+		if(this.next && this.prev) {
+			this.next.addEventListener('click', this.nextSlide.bind(_this));
+			this.prev.addEventListener('click', this.prevSlide.bind(_this));
+		}
+
 
 		if(options.dots) {
 			this.enableDots()
@@ -47,7 +46,7 @@ class Slider {
 	}
 
 	enableDots() {
-		const dots = document.querySelector('.slider__dots');
+		const dots = this.el.querySelector('.slider__dots');
 		this.dots = [];
 		this.slides.forEach((slide, index) => {
 			const dot = document.createElement('button');
@@ -114,7 +113,3 @@ class Slider {
 		this.yDown = null;
 	}
 }
-
-const slider = new Slider({
-	dots: true
-});

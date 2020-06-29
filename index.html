@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div class="slider opacity">
+	<div class="slider opacity" id="slider">
 		<div class="slider__content">
 			<img class="slider__slide" src="https://cdn.shopify.com/s/files/1/0086/5429/1040/products/twig-plants-and-pots-recycled-cotton-indoor-plant-pot-fairytale-1_2400x.jpg?v=1590411693">
 			<img class="slider__slide" src="https://cdn.shopify.com/s/files/1/0086/5429/1040/products/twig-plants-and-pots-recycled-cotton-indoor-plant-pot-fairytale-2_2400x.jpg?v=1590411694">
@@ -23,5 +23,10 @@
 		<div role="tablist" class="slider__dots"></div>
 	</div>
 	<script src="slider.js"></script>
+	<script>
+		const slider = new Showcase(document.getElementById('slider'), {
+			dots: true
+		});
+	</script>
 </body>
 </html>
