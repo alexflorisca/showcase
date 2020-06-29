@@ -17,9 +17,8 @@ class Showcase {
 		}
 		const _this = this;
 		this.el = el;
-		this.container = el.querySelector('.slider');
-		this.content = el.querySelector('.slider__content');
-		this.slides = el.querySelectorAll('.slider__slide');
+		this.content = el.querySelector('.showcase__content');
+		this.slides = el.querySelectorAll('.showcase__slide');
 		if(!this.content || this.slides.length === 0) {
 			console.warn('Invalid markup or no slides found');
 			return;
@@ -32,8 +31,8 @@ class Showcase {
 		this.content.addEventListener('click', this.nextSlide.bind(_this));
 		this.el.addEventListener('touchstart', throttle(this.handleTouchStart.bind(_this), 250));
 		this.el.addEventListener('touchmove', throttle(this.handleTouchMove.bind(_this), 250));
-		this.next = el.querySelector('.slider__next');
-		this.prev = el.querySelector('.slider__prev');
+		this.next = el.querySelector('.showcase__next');
+		this.prev = el.querySelector('.showcase__prev');
 		if(this.next && this.prev) {
 			this.next.addEventListener('click', this.nextSlide.bind(_this));
 			this.prev.addEventListener('click', this.prevSlide.bind(_this));
@@ -46,12 +45,12 @@ class Showcase {
 	}
 
 	enableDots() {
-		const dots = this.el.querySelector('.slider__dots');
+		const dots = this.el.querySelector('.showcase__dots');
 		this.dots = [];
 		this.slides.forEach((slide, index) => {
 			const dot = document.createElement('button');
 			dot.setAttribute('data-slide-index', index)
-			dot.classList.add('slider__dot');
+			dot.classList.add('showcase__dot');
 			if(index === this.activeSlideIndex) {
 				dot.classList.add('active');
 			}
