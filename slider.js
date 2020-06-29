@@ -1,12 +1,10 @@
-// TODO: If no buttons set, still add next event listener
-// TODO: Fix throttle func to work without this
 function throttle(f, t) {
-	let lastCall;
+	let inThrottle;
 	return function(args) {
-		let previousCall = lastCall;
-		lastCall = Date.now();
-		if(previousCall === undefined || previousCall - lastCall >= t) {
+		if(!inThrottle) {
 			f(args);
+			inThrottle = true;
+			setTimeout(() => inThrottle = false, t)
 		}
 	}
 }
@@ -16,12 +14,21 @@ class Slider {
 		const slider = this;
 		this.container = document.querySelector('.slider');
 		this.slides = document.querySelectorAll('.slider__slide');
-		if(this.slides.length === 0) {
+		if(!this.container || this.slides.length === 0) {
 			console.warn('No slides found in slider')
 			return;
 		}
+
+		this.container.addEventListener('click', this.nextSlide.bind(slider));
+
+		// Prev and Next buttons
 		this.next = document.querySelector('.slider__next');
 		this.prev = document.querySelector('.slider__prev');
+
+		if(this.next && this.prev) {
+			this.next.addEventListener('click', this.nextSlide.bind(slider));
+			this.prev.addEventListener('click', this.prevSlide.bind(slider));
+		}
 
 		this.xDown = null;
 		this.yDown = null;
@@ -30,15 +37,12 @@ class Slider {
 
 		this.slides[this.activeSlideIndex].classList.add('active');
 
-		this.container.addEventListener('touchstart', this.handleTouchStart.bind(slider))
-		this.container.addEventListener('touchmove', this.handleTouchMove.bind(slider))
+		this.container.addEventListener('touchstart', throttle(this.handleTouchStart.bind(slider), 500));
+		this.container.addEventListener('touchmove', throttle(this.handleTouchMove.bind(slider), 500));
 
-		this.next.addEventListener('click', this.handleNextSlide.bind(slider));
-		this.prev.addEventListener('click', this.handlePrevSlide.bind(slider));
 	}
 
-	handleNextSlide() {
-		console.log('clicking next');
+	nextSlide() {
 		const nextSlide = (this.activeSlideIndex === this.slides.length-1) ? 0 : this.activeSlideIndex+1;
 		console.log('next slide', nextSlide);
 		this.slides[nextSlide].classList.add('active');
@@ -46,8 +50,7 @@ class Slider {
 		this.activeSlideIndex = nextSlide;
 	}
 
-	handlePrevSlide() {
-		console.log('clicking prev');
+	prevSlide() {
 		const nextSlide = (this.activeSlideIndex === 0) ? this.slides.length-1 : this.activeSlideIndex-1;
 		console.log('next slide', nextSlide);
 		this.slides[nextSlide].classList.add('active');
@@ -62,7 +65,7 @@ class Slider {
 	}
 
 	handleTouchMove(e) {
-		console.log('move executing');
+		console.log(this, this.xDown, this.yDown)
 		if(!this.xDown || !this.yDown) {
 			return
 		}
@@ -72,13 +75,13 @@ class Slider {
 		const xDiff = this.xDown - xUp;
 		const yDiff = this.yDown - yUp;
 		if( Math.abs(xDiff) > Math.abs(yDiff) ) {
+			// Left swipe
 			if(xDiff > 0) {
-				// Left swipe
-				this.handleNextSlide();
+				this.nextSlide();
 			}
+			// Right swipe
 			else {
-				// Right swipe
-				this.handlePrevSlide()
+				this.prevSlide()
 			}
 		}
 
