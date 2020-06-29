@@ -46,13 +46,6 @@ body {
   top: 50%;
 }
 
-@media screen and (min-width: 780px) {
-  .showcase__prev,
-  .showcase__next {
-    display: block;
-  }
-}
-
 .showcase__next {
   right: 10px;
 }
@@ -86,7 +79,13 @@ body {
   background: #a89cc8;
 }
 
+
 @media screen and (min-width: 780px) {
+  .showcase__prev,
+  .showcase__next {
+    display: block;
+  }
+  
   .product-images .glider-prev,
   .product-images .glider-next {
     display: none;
