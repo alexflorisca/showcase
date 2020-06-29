@@ -28,6 +28,14 @@ class Showcase {
 		this.activeSlideIndex = 0;
 		this.slides[this.activeSlideIndex].classList.add('active');
 
+		this.content.addEventListener('keydown', e => {
+			if(e.keyCode === 37) {
+				this.prevSlide();
+			}
+			if(e.keyCode === 39) {
+				this.nextSlide();
+			}
+		})
 		this.content.addEventListener('click', this.nextSlide.bind(_this));
 		this.content.addEventListener('touchstart', throttle(this.handleTouchStart.bind(_this), 250));
 		this.content.addEventListener('touchmove', throttle(this.handleTouchMove.bind(_this), 250));
@@ -68,6 +76,7 @@ class Showcase {
 		this.dots[this.activeSlideIndex].classList.remove('active');
 		this.dots[nextSlide].classList.add('active');
 		this.activeSlideIndex = nextSlide;
+		this.slides[this.activeSlideIndex].focus();
 	}
 
 	nextSlide() {
