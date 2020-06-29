@@ -49,6 +49,7 @@ class Showcase {
 		this.slides.forEach((slide, index) => {
 			const dot = document.createElement('button');
 			dot.setAttribute('data-slide-index', index)
+			dot.setAttribute('aria-label', `Image ${index+1} of ${this.slides.length}`)					
 			dot.classList.add('showcase__dot');
 			if(index === this.activeSlideIndex) {
 				dot.classList.add('active');

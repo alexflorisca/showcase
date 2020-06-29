@@ -13,15 +13,23 @@ body {
   width: 100%;
   display: flex;
   overflow-x: auto;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 .showcase__slide {
   width: 100%;
+  display: list-item;
   opacity: 0;
   transition: opacity 0.4s ease 0s;
-  float: left;
   position: relative;
   margin-right: -100%;
+}
+
+.showcase__slide img {
+  width: 100%;
+  height: auto;
 }
 
 .showcase__slide.active {
@@ -44,6 +52,11 @@ body {
   cursor: pointer;
   position: absolute;
   top: 50%;
+}
+
+.showcase__prev:focus,
+.showcase__next:focus {
+  outline: -webkit-focus-ring-color auto 1px;
 }
 
 .showcase__next {

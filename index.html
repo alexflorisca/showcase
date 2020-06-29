@@ -3,22 +3,22 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Product Images</title>
+	<title>Showcase</title>
 	<link rel="stylesheet" href="showcase.css">
 </head>
 <body>
 	<div class="showcase" id="showcase">
-		<div class="showcase__content">
-			<img class="showcase__slide" src="https://cdn.shopify.com/s/files/1/0086/5429/1040/products/twig-plants-and-pots-recycled-cotton-indoor-plant-pot-fairytale-1_2400x.jpg?v=1590411693">
-			<img class="showcase__slide" src="https://cdn.shopify.com/s/files/1/0086/5429/1040/products/twig-plants-and-pots-recycled-cotton-indoor-plant-pot-fairytale-2_2400x.jpg?v=1590411694">
-			<img class="showcase__slide" src="https://cdn.shopify.com/s/files/1/0086/5429/1040/products/twig-indoor-plant-pots-new-range-2020-6_2400x.jpg?v=1590411694">
-			<img class="showcase__slide" src="https://cdn.shopify.com/s/files/1/0086/5429/1040/products/twig-indoor-plant-pots-new-range-2020-13_0b77ad75-af2d-483f-a78f-95f19a0369cd_2400x.jpg?v=1590411695">
-		</div>
-		<button role="button" aria-label="next" class="showcase__prev">
-			<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 443.52 443.52"><path d="M143.492 221.863L336.226 29.129c6.663-6.664 6.663-17.468 0-24.132-6.665-6.662-17.468-6.662-24.132 0l-204.8 204.8c-6.662 6.664-6.662 17.468 0 24.132l204.8 204.8c6.78 6.548 17.584 6.36 24.132-.42 6.387-6.614 6.387-17.099 0-23.712L143.492 221.863z"/></svg>
+		<ul class="showcase__content" aria-label="Images" tabindex="0">
+			<li class="showcase__slide"><img alt="Image 1" src="https://cdn.shopify.com/s/files/1/0086/5429/1040/products/twig-plants-and-pots-recycled-cotton-indoor-plant-pot-fairytale-1_2400x.jpg?v=1590411693"></li>
+			<li class="showcase__slide"><img alt="Image 2" src="https://cdn.shopify.com/s/files/1/0086/5429/1040/products/twig-plants-and-pots-recycled-cotton-indoor-plant-pot-fairytale-2_2400x.jpg?v=1590411694"></li>
+			<li class="showcase__slide"><img alt="Image 3" src="https://cdn.shopify.com/s/files/1/0086/5429/1040/products/twig-indoor-plant-pots-new-range-2020-6_2400x.jpg?v=1590411694"></li>
+			<li class="showcase__slide"><img alt="Image 4" src="https://cdn.shopify.com/s/files/1/0086/5429/1040/products/twig-indoor-plant-pots-new-range-2020-13_0b77ad75-af2d-483f-a78f-95f19a0369cd_2400x.jpg?v=1590411695"></li>
+		</ul>
+		<button type="button" aria-label="previous" class="showcase__prev">
+			<svg alt="Previous" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 443.52 443.52"><path d="M143.492 221.863L336.226 29.129c6.663-6.664 6.663-17.468 0-24.132-6.665-6.662-17.468-6.662-24.132 0l-204.8 204.8c-6.662 6.664-6.662 17.468 0 24.132l204.8 204.8c6.78 6.548 17.584 6.36 24.132-.42 6.387-6.614 6.387-17.099 0-23.712L143.492 221.863z"/></svg>
 		</button>
-		<button role="button" aria-label="previous" class="showcase__next">
-			<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 443.52 443.52"><path d="M336.226 209.591l-204.8-204.8c-6.78-6.548-17.584-6.36-24.132.42-6.388 6.614-6.388 17.099 0 23.712l192.734 192.734-192.734 192.734c-6.663 6.664-6.663 17.468 0 24.132 6.665 6.663 17.468 6.663 24.132 0l204.8-204.8c6.663-6.665 6.663-17.468 0-24.132z"/></svg>
+		<button type="button" aria-label="next" class="showcase__next">
+			<svg alt="Next" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 443.52 443.52"><path d="M336.226 209.591l-204.8-204.8c-6.78-6.548-17.584-6.36-24.132.42-6.388 6.614-6.388 17.099 0 23.712l192.734 192.734-192.734 192.734c-6.663 6.664-6.663 17.468 0 24.132 6.665 6.663 17.468 6.663 24.132 0l204.8-204.8c6.663-6.665 6.663-17.468 0-24.132z"/></svg>
 		</button>
 		<div role="tablist" class="showcase__dots"></div>
 	</div>
