@@ -10,16 +10,17 @@ function throttle(f, t) {
 }
 
 class Slider {
-	constructor() {
+	constructor(options) {
 		const slider = this;
 		this.container = document.querySelector('.slider');
+		this.content = document.querySelector('.slider__content');
 		this.slides = document.querySelectorAll('.slider__slide');
-		if(!this.container || this.slides.length === 0) {
-			console.warn('No slides found in slider')
+		if(!this.container || !this.content || this.slides.length === 0) {
+			console.warn('Invalid markup or no slides found')
 			return;
 		}
 
-		this.container.addEventListener('click', this.nextSlide.bind(slider));
+		this.content.addEventListener('click', this.nextSlide.bind(slider));
 
 		// Prev and Next buttons
 		this.next = document.querySelector('.slider__next');
@@ -37,29 +38,53 @@ class Slider {
 
 		this.slides[this.activeSlideIndex].classList.add('active');
 
-		this.container.addEventListener('touchstart', throttle(this.handleTouchStart.bind(slider), 500));
-		this.container.addEventListener('touchmove', throttle(this.handleTouchMove.bind(slider), 500));
+		this.container.addEventListener('touchstart', throttle(this.handleTouchStart.bind(slider), 250));
+		this.container.addEventListener('touchmove', throttle(this.handleTouchMove.bind(slider), 250));
 
+		if(options.dots) {
+			this.enableDots()
+		}
+	}
+
+	enableDots() {
+		const dots = document.querySelector('.slider__dots');
+		this.dots = [];
+		this.slides.forEach((slide, index) => {
+			const dot = document.createElement('button');
+			dot.setAttribute('data-slide-index', index)
+			dot.classList.add('slider__dot');
+			if(index === this.activeSlideIndex) {
+				dot.classList.add('active');
+			}
+			dot.addEventListener('click', () => {
+				this.changeActiveSlide(index);
+			})
+			this.dots[index] = dot;
+			dots.appendChild(dot);
+		})
+	}
+
+	changeActiveSlide(nextSlide) {
+		this.slides[this.activeSlideIndex].classList.remove('active');
+		this.slides[nextSlide].classList.add('active');
+		this.dots[this.activeSlideIndex].classList.remove('active');
+		this.dots[nextSlide].classList.add('active');
+		this.activeSlideIndex = nextSlide;
 	}
 
 	nextSlide() {
 		const nextSlide = (this.activeSlideIndex === this.slides.length-1) ? 0 : this.activeSlideIndex+1;
 		console.log('next slide', nextSlide);
-		this.slides[nextSlide].classList.add('active');
-		this.slides[this.activeSlideIndex].classList.remove('active');
-		this.activeSlideIndex = nextSlide;
+		this.changeActiveSlide(nextSlide);
 	}
 
 	prevSlide() {
 		const nextSlide = (this.activeSlideIndex === 0) ? this.slides.length-1 : this.activeSlideIndex-1;
 		console.log('next slide', nextSlide);
-		this.slides[nextSlide].classList.add('active');
-		this.slides[this.activeSlideIndex].classList.remove('active');
-		this.activeSlideIndex = nextSlide;
+		this.changeActiveSlide(nextSlide);
 	}
 
 	handleTouchStart(e) {
-		console.log(e);
 		this.xDown = e.touches[0].clientX;
 		this.yDown = e.touches[0].clientY;
 	}
@@ -90,4 +115,6 @@ class Slider {
 	}
 }
 
-const slider = new Slider();
+const slider = new Slider({
+	dots: true
+});
