@@ -1,0 +1,23 @@
+{
+  "name": "showcase",
+  "version": "0.0.0",
+  "description": "A simple UI component for showcasing images with the best UI for each device",
+  "main": "showcase.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexflorisca/showcase.git"
+  },
+  "author": "Alex Florisca",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexflorisca/showcase/issues"
+  },
+  "homepage": "https://github.com/alexflorisca/showcase#readme",
+  "devDependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  }
+}

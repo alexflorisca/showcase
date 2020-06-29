@@ -29,15 +29,14 @@ class Showcase {
 		this.slides[this.activeSlideIndex].classList.add('active');
 
 		this.content.addEventListener('click', this.nextSlide.bind(_this));
-		this.el.addEventListener('touchstart', throttle(this.handleTouchStart.bind(_this), 250));
-		this.el.addEventListener('touchmove', throttle(this.handleTouchMove.bind(_this), 250));
+		this.content.addEventListener('touchstart', throttle(this.handleTouchStart.bind(_this), 250));
+		this.content.addEventListener('touchmove', throttle(this.handleTouchMove.bind(_this), 250));
 		this.next = el.querySelector('.showcase__next');
 		this.prev = el.querySelector('.showcase__prev');
 		if(this.next && this.prev) {
 			this.next.addEventListener('click', this.nextSlide.bind(_this));
 			this.prev.addEventListener('click', this.prevSlide.bind(_this));
 		}
-
 
 		if(options.dots) {
 			this.enableDots()
@@ -72,13 +71,11 @@ class Showcase {
 
 	nextSlide() {
 		const nextSlide = (this.activeSlideIndex === this.slides.length-1) ? 0 : this.activeSlideIndex+1;
-		console.log('next slide', nextSlide);
 		this.changeActiveSlide(nextSlide);
 	}
 
 	prevSlide() {
 		const nextSlide = (this.activeSlideIndex === 0) ? this.slides.length-1 : this.activeSlideIndex-1;
-		console.log('next slide', nextSlide);
 		this.changeActiveSlide(nextSlide);
 	}
 
@@ -88,10 +85,8 @@ class Showcase {
 	}
 
 	handleTouchMove(e) {
-		console.log(this, this.xDown, this.yDown)
-		if(!this.xDown || !this.yDown) {
-			return
-		}
+		if(!this.xDown || !this.yDown) return;
+		
 		const xUp = e.touches[0].clientX;
 		const yUp = e.touches[0].clientY;
 
