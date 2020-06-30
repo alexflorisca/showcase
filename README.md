@@ -6,7 +6,7 @@ Showcase is a simple front-end component for displaying a bunch of images in the
 
 ## Why?
 
-Born out of frustration with Shopify themes. While making some small changes to an existing theme, I found that the product image gallery was pulling in 2 different slideshow libraries, both dependent on jQuery of course. Chuck in different sets of markup for desktop and mobile and thousands of lines of CSS and you've got a payload that's about 250kb - just to display some images. 
+Born out of frustration with Shopify themes. While making some small changes to an existing theme, I found that the product image gallery was pulling in 2 different slideshow libraries, both dependent on jQuery of course. Chuck in different sets of markup for desktop and mobile and hundreds of lines of CSS and you've got a payload that's about 250kb - just to display some images. 
 
 Fuck that. 
 

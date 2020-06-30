@@ -10,7 +10,7 @@ function throttle(f, t) {
 }
 
 class Showcase {
-	constructor(el, options) {
+	constructor(el) {
 		if(!el) {
 			console.warn('No showcase element found');
 			return;
@@ -23,6 +23,7 @@ class Showcase {
 			console.warn('Invalid markup or no slides found');
 			return;
 		}
+		this.dots = [];
 		this.xDown = null;
 		this.yDown = null;
 		this.activeSlideIndex = 0;
@@ -45,15 +46,12 @@ class Showcase {
 			this.next.addEventListener('click', this.nextSlide.bind(_this));
 			this.prev.addEventListener('click', this.prevSlide.bind(_this));
 		}
-
-		if(options.dots) {
-			this.enableDots()
-		}
+		
+		this.enableDots()
 	}
 
 	enableDots() {
-		const dots = this.el.querySelector('.showcase__dots');
-		this.dots = [];
+		const dotsEl = this.el.querySelector('.showcase__dots');
 		this.slides.forEach((slide, index) => {
 			const dot = document.createElement('button');
 			dot.setAttribute('data-slide-index', index)
@@ -66,7 +64,7 @@ class Showcase {
 				this.changeActiveSlide(index);
 			})
 			this.dots[index] = dot;
-			dots.appendChild(dot);
+			dotsEl.appendChild(dot);
 		})
 	}
 
