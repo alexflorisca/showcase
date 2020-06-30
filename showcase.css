@@ -94,12 +94,17 @@
   .showcase__slide {
     opacity: 1;
   }
+
+  /* Center last image, but only if it's an odd number */
+  .showcase__slide:nth-last-child(1):nth-child(odd) {
+    justify-self: center;
+  }
   
   .showcase__content {
     width: 100%;
     display: grid;
-    grid-template-columns: 45% 45%;
+    grid-template-columns: 47% 47%;
     grid-template-rows: auto;
-    grid-gap: 5%;
+    grid-gap: 3%;
   }
 }
