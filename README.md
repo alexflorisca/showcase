@@ -1,5 +1,6 @@
 # Showcase
 
+**Note: This is a work in progress. Please leave an issue with feedback & bug reports**
 Showcase is a simple front-end component for displaying a bunch of images in the most optimal way for all devices. A slider on small width screens, a grid of images at biggers widths. Because why hide all your fancy images if you don't have to.
 
 ## Why?
