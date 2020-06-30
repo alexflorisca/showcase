@@ -4,7 +4,8 @@
   "description": "A simple UI component for showcasing images with the best UI for each device",
   "main": "showcase.js",
   "scripts": {
-    "start": "parcel index.html"
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "repository": {
     "type": "git",

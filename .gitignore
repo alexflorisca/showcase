@@ -1,6 +1,7 @@
 # Project #
 ###################
 node_modules
+dist
 upload
 deploy.log
 config/shopify.yml
