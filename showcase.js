@@ -115,3 +115,4 @@ class Showcase {
 		this.yDown = null;
 	}
 }
+window.Showcase = Showcase;
