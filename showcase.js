@@ -10,7 +10,7 @@ function throttle(f, t) {
 }
 
 class Showcase {
-	constructor(el) {
+	constructor(el, options) {
 		if(!el) {
 			console.warn('No showcase element found');
 			return;
@@ -23,7 +23,10 @@ class Showcase {
 			console.warn('Invalid markup or no slides found');
 			return;
 		}
-		this.dots = [];
+		this.breakpoints = options.breakpoints || [600, 1200];
+		this.screenWidth = window.innerWidth;
+		this.thumbsEl = null;
+		this.thumbs = [];
 		this.xDown = null;
 		this.yDown = null;
 		this.activeSlideIndex = 0;
@@ -47,32 +50,66 @@ class Showcase {
 			this.prev.addEventListener('click', this.prevSlide.bind(_this));
 		}
 		
-		this.enableDots()
+		window.addEventListener('resize', throttle(this.onScreenResize.bind(_this), 100));
+		this.addThumbs();
 	}
 
-	enableDots() {
-		const dotsEl = this.el.querySelector('.showcase__dots');
+	onScreenResize() {
+		this.screenWidth = window.innerWidth;
+		console.log(this.thumbsEl, this.innerWidth, this.breakpoints)
+		this.updateThumbStyles();
+	}
+
+	updateThumbStyles() {
+		if(this.screenWidth < this.breakpoints[0]) {
+			this.el.classList.remove('showcase--grid');
+			this.thumbsEl.classList.remove('showcase__thumbs--img');
+			this.thumbsEl.classList.add('showcase__thumbs--dot');
+			console.log('adding dots')
+		} else if(this.screenWidth > this.breakpoints[0] && this.screenWidth < this.breakpoints[1]) {
+			this.el.classList.remove('showcase--grid');
+			this.thumbsEl.classList.remove('showcase__thumbs--dot');
+			this.thumbsEl.classList.add('showcase__thumbs--img');
+		} else {
+			this.el.classList.add('showcase--grid');
+			this.thumbsEl.classList.remove('showcase__thumbs--dot');
+			this.thumbsEl.classList.remove('showcase__thumbs--img');
+		}
+	}
+
+	addThumbs() {
+		if(this.screenWidth > this.breakpoints[1]) {
+			return;
+		}
+		this.thumbsEl = document.createElement('div');
+		this.thumbsEl.setAttribute('role', 'tablist');
+		this.thumbsEl.classList.add('showcase__thumbs');
+		this.updateThumbStyles();
+
+		this.el.appendChild(this.thumbsEl);
+
 		this.slides.forEach((slide, index) => {
-			const dot = document.createElement('button');
-			dot.setAttribute('data-slide-index', index)
-			dot.setAttribute('aria-label', `Image ${index+1}`)					
-			dot.classList.add('showcase__dot');
+			const b = document.createElement('button')
+			b.setAttribute('data-slide-index', index)
+			b.setAttribute('aria-label', `Image ${index+1}`)
+			b.innerHTML = `<img src="${slide.firstChild.getAttribute('src')}">`;
+
 			if(index === this.activeSlideIndex) {
-				dot.classList.add('active');
+				b.classList.add('active');
 			}
-			dot.addEventListener('click', () => {
+			b.addEventListener('click', () => {
 				this.changeActiveSlide(index);
 			})
-			this.dots[index] = dot;
-			dotsEl.appendChild(dot);
+			this.thumbs[index] = b;
+			this.thumbsEl.appendChild(b);
 		})
 	}
 
 	changeActiveSlide(nextSlide) {
 		this.slides[this.activeSlideIndex].classList.remove('active');
 		this.slides[nextSlide].classList.add('active');
-		this.dots[this.activeSlideIndex].classList.remove('active');
-		this.dots[nextSlide].classList.add('active');
+		this.thumbs[this.activeSlideIndex].classList.remove('active');
+		this.thumbs[nextSlide].classList.add('active');
 		this.activeSlideIndex = nextSlide;
 		this.slides[this.activeSlideIndex].focus();
 	}
