@@ -65,7 +65,6 @@ class Showcase {
 			this.el.classList.remove('showcase--grid');
 			this.thumbsEl.classList.remove('showcase__thumbs--img');
 			this.thumbsEl.classList.add('showcase__thumbs--dot');
-			console.log('adding dots')
 		} else if(this.screenWidth > this.breakpoints[0] && this.screenWidth < this.breakpoints[1]) {
 			this.el.classList.remove('showcase--grid');
 			this.thumbsEl.classList.remove('showcase__thumbs--dot');
@@ -78,15 +77,11 @@ class Showcase {
 	}
 
 	addThumbs() {
-		if(this.screenWidth > this.breakpoints[1]) {
-			return;
-		}
 		this.thumbsEl = document.createElement('div');
 		this.thumbsEl.setAttribute('role', 'tablist');
 		this.thumbsEl.classList.add('showcase__thumbs');
-		this.updateThumbStyles();
-
 		this.el.appendChild(this.thumbsEl);
+		this.updateThumbStyles();
 
 		this.slides.forEach((slide, index) => {
 			const b = document.createElement('button')
@@ -108,8 +103,10 @@ class Showcase {
 	changeActiveSlide(nextSlide) {
 		this.slides[this.activeSlideIndex].classList.remove('active');
 		this.slides[nextSlide].classList.add('active');
-		this.thumbs[this.activeSlideIndex].classList.remove('active');
-		this.thumbs[nextSlide].classList.add('active');
+		if(this.thumbs.length > 0) {
+			this.thumbs[this.activeSlideIndex].classList.remove('active');
+			this.thumbs[nextSlide].classList.add('active');
+		}
 		this.activeSlideIndex = nextSlide;
 		this.slides[this.activeSlideIndex].focus();
 	}
