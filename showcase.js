@@ -52,6 +52,7 @@ class Showcase {
 		
 		window.addEventListener('resize', throttle(this.onScreenResize.bind(_this), 100));
 		this.addThumbs();
+		this.thumbsElGridStyle = this.getThumbsElGridStyle();
 	}
 
 	onScreenResize() {
@@ -60,19 +61,50 @@ class Showcase {
 		this.updateThumbStyles();
 	}
 
+	// TODO: Tidy this if not needed
+	// setThumbsElGridStyle() {
+	// 	if(this.thumbsElGridStyle) {
+	// 		return this.thumbsElGridStyle;
+	// 	}
+
+	// 	const thumbCount = this.thumbsEl.children.length;
+	// 	const thumbWidth = (this.el.offsetWidth / thumbCount);
+	// 	const defaultThumbWidth = (this.el.offsetWidth / 5);
+	// 	const thumbColWidth = thumbWidth < defaultThumbWidth ? `1fr` : `${defaultThumbWidth}px`;
+	// 	this.thumbsElGridStyle = `repeat(${thumbCount}, ${thumbColWidth})`;
+	// }
+
+	setImageThumbs() {
+		this.el.classList.remove('showcase--grid');
+		this.thumbsEl.classList.remove('showcase__thumbs--dot');
+		this.thumbsEl.classList.add('showcase__thumbs--img');
+	}
+
+	setDotThumbs() {
+		Array.from(this.thumbsEl.children).forEach(child => {
+			child.style.width = null;
+		})
+		this.el.classList.remove('showcase--grid');
+		this.thumbsEl.classList.remove('showcase__thumbs--img');
+		this.thumbsEl.classList.add('showcase__thumbs--dot');
+	}
+
+	removeThumbs() {
+		this.el.classList.add('showcase--grid');
+		this.thumbsEl.classList.remove('showcase__thumbs--dot');
+		this.thumbsEl.classList.remove('showcase__thumbs--img');
+	}
+
 	updateThumbStyles() {
+		// dotted thumbnails on small screens
 		if(this.screenWidth < this.breakpoints[0]) {
-			this.el.classList.remove('showcase--grid');
-			this.thumbsEl.classList.remove('showcase__thumbs--img');
-			this.thumbsEl.classList.add('showcase__thumbs--dot');
+			this.setDotThumbs();
+		// image thumbnails on medium screens
 		} else if(this.screenWidth > this.breakpoints[0] && this.screenWidth < this.breakpoints[1]) {
-			this.el.classList.remove('showcase--grid');
-			this.thumbsEl.classList.remove('showcase__thumbs--dot');
-			this.thumbsEl.classList.add('showcase__thumbs--img');
+			this.setImageThumbs();
+		// no thumbnails on big screens
 		} else {
-			this.el.classList.add('showcase--grid');
-			this.thumbsEl.classList.remove('showcase__thumbs--dot');
-			this.thumbsEl.classList.remove('showcase__thumbs--img');
+			this.removeThumbs();
 		}
 	}
 
@@ -81,7 +113,6 @@ class Showcase {
 		this.thumbsEl.setAttribute('role', 'tablist');
 		this.thumbsEl.classList.add('showcase__thumbs');
 		this.el.appendChild(this.thumbsEl);
-		this.updateThumbStyles();
 
 		this.slides.forEach((slide, index) => {
 			const b = document.createElement('button')
@@ -98,6 +129,7 @@ class Showcase {
 			this.thumbs[index] = b;
 			this.thumbsEl.appendChild(b);
 		})
+		this.updateThumbStyles();
 	}
 
 	changeActiveSlide(nextSlide) {

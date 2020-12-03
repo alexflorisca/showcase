@@ -63,6 +63,12 @@
   list-style-type: none;
 }
 
+.showcase__thumbs--img {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
+  column-gap: 1%;
+}
+
 .showcase__thumbs--img button,
 .showcase__thumbs--dot button {
   background: none;
@@ -95,9 +101,10 @@
 }
 
 .showcase__thumbs--img button {
-  width: 100px;
-  height: 100px;
-  margin: 0 5px;
+  /* Width is set with JS */
+  height: auto;
+  max-width: 100px;
+  margin: 0 0px;
 }
 
 .showcase__thumbs--img img {

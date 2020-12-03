@@ -38,7 +38,6 @@ Performance was a key driver for this project, so I'm keeping it purposefully sm
 
 Works in all modern browsers and web views. Nobody uses IE anymore (https://caniuse.com/usage-table). 1.42% are on IE11 and Microsoft is trying hard to get people off it. So no polyfills, no hacks, just clean code.
 
+### Design decisions
 
-
-
-
+- No slide transitions, only animating opacity
