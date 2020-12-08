@@ -52,10 +52,12 @@ class Showcase {
 			this.prev.addEventListener('click', this.prevSlide.bind(_this));
 		}
 		
-		// if(!window || !window.ResizeObserver) {
-		// 	window.addEventListener('resize', throttle(this.onScreenResize.bind(_this), 100));
-		// }
-		this.addResizeObserver();
+		if(!window || !window.ResizeObserver) {
+			window.addEventListener('resize', throttle(this.onScreenResize.bind(_this), 100));
+		}
+		else {
+			this.addResizeObserver();
+		}
 		this.addThumbs();
 	}
 
