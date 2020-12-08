@@ -17,22 +17,24 @@ class Showcase {
 		}
 		const _this = this;
 		this.el = el;
-		this.content = el.querySelector('.showcase__content');
+		this.mainEl = el.querySelector('.showcase__main');
+		this.contentEl = el.querySelector('.showcase__content');
 		this.slides = el.querySelectorAll('.showcase__slide');
-		if(!this.content || this.slides.length === 0) {
+		if(!this.contentEl || this.slides.length === 0) {
 			console.warn('Invalid markup or no slides found');
 			return;
 		}
 		this.breakpoints = options.breakpoints || [600, 1200];
 		this.screenWidth = window.innerWidth;
-		this.thumbsEl = null;
+		this.thumbsEl = el.querySelector('.showcase__thumbs');
+		this.thumbPos = options.thumbPosition || 'bottom';
 		this.thumbs = [];
 		this.xDown = null;
 		this.yDown = null;
 		this.activeSlideIndex = 0;
 		this.slides[this.activeSlideIndex].classList.add('active');
 
-		this.content.addEventListener('keydown', e => {
+		this.contentEl.addEventListener('keydown', e => {
 			if(e.keyCode === 37) {
 				this.prevSlide();
 			}
@@ -40,9 +42,9 @@ class Showcase {
 				this.nextSlide();
 			}
 		})
-		this.content.addEventListener('click', this.nextSlide.bind(_this));
-		this.content.addEventListener('touchstart', throttle(this.handleTouchStart.bind(_this), 250));
-		this.content.addEventListener('touchmove', throttle(this.handleTouchMove.bind(_this), 250));
+		this.contentEl.addEventListener('click', this.nextSlide.bind(_this));
+		this.contentEl.addEventListener('touchstart', throttle(this.handleTouchStart.bind(_this), 250));
+		this.contentEl.addEventListener('touchmove', throttle(this.handleTouchMove.bind(_this), 250));
 		this.next = el.querySelector('.showcase__next');
 		this.prev = el.querySelector('.showcase__prev');
 		if(this.next && this.prev) {
@@ -50,34 +52,42 @@ class Showcase {
 			this.prev.addEventListener('click', this.prevSlide.bind(_this));
 		}
 		
-		window.addEventListener('resize', throttle(this.onScreenResize.bind(_this), 100));
+		// if(!window || !window.ResizeObserver) {
+		// 	window.addEventListener('resize', throttle(this.onScreenResize.bind(_this), 100));
+		// }
+		this.addResizeObserver();
 		this.addThumbs();
-		this.thumbsElGridStyle = this.getThumbsElGridStyle();
+	}
+
+	addResizeObserver() {
+		const observer = new ResizeObserver(entries => {
+			entries.forEach(entry => {
+				this.screenWidth = window.innerWidth;
+				this.updateThumbStyles();
+			})
+		});
+		observer.observe(this.contentEl);
 	}
 
 	onScreenResize() {
 		this.screenWidth = window.innerWidth;
-		console.log(this.thumbsEl, this.innerWidth, this.breakpoints)
 		this.updateThumbStyles();
 	}
-
-	// TODO: Tidy this if not needed
-	// setThumbsElGridStyle() {
-	// 	if(this.thumbsElGridStyle) {
-	// 		return this.thumbsElGridStyle;
-	// 	}
-
-	// 	const thumbCount = this.thumbsEl.children.length;
-	// 	const thumbWidth = (this.el.offsetWidth / thumbCount);
-	// 	const defaultThumbWidth = (this.el.offsetWidth / 5);
-	// 	const thumbColWidth = thumbWidth < defaultThumbWidth ? `1fr` : `${defaultThumbWidth}px`;
-	// 	this.thumbsElGridStyle = `repeat(${thumbCount}, ${thumbColWidth})`;
-	// }
 
 	setImageThumbs() {
 		this.el.classList.remove('showcase--grid');
 		this.thumbsEl.classList.remove('showcase__thumbs--dot');
 		this.thumbsEl.classList.add('showcase__thumbs--img');
+
+		if(this.thumbPos === 'right') {
+			this.thumbsEl.style.height = `${this.contentEl.offsetHeight}px`;
+			this.el.classList.add('showcase--thumbs-right');
+		}
+
+		if(this.thumbPos === 'left') {
+			this.thumbsEl.style.height = `${this.contentEl.offsetHeight}px`;
+			this.el.classList.add('showcase--thumbs-left');
+		}
 	}
 
 	setDotThumbs() {
@@ -85,8 +95,11 @@ class Showcase {
 			child.style.width = null;
 		})
 		this.el.classList.remove('showcase--grid');
+		this.el.classList.remove('showcase--thumbs-right');
+		this.el.classList.remove('showcase--thumbs-left');
 		this.thumbsEl.classList.remove('showcase__thumbs--img');
 		this.thumbsEl.classList.add('showcase__thumbs--dot');
+		this.thumbsEl.style.removeProperty('height');
 	}
 
 	removeThumbs() {
@@ -109,11 +122,6 @@ class Showcase {
 	}
 
 	addThumbs() {
-		this.thumbsEl = document.createElement('div');
-		this.thumbsEl.setAttribute('role', 'tablist');
-		this.thumbsEl.classList.add('showcase__thumbs');
-		this.el.appendChild(this.thumbsEl);
-
 		this.slides.forEach((slide, index) => {
 			const b = document.createElement('button')
 			b.setAttribute('data-slide-index', index)
