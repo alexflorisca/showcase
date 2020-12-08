@@ -4,6 +4,16 @@
 
 Showcase is a simple front-end component for displaying a bunch of images in the most optimal way for all devices. A slider on small width screens, a grid of images at biggers widths. Because why hide all your fancy images if you don't have to.
 
+## Usage
+
+```js
+
+```
+
+## Options
+
+**`breakpoints`** - 
+
 ## Why?
 
 Born out of frustration with Shopify themes. While making some small changes to an existing theme, I found that the product image gallery was pulling in 2 different slideshow libraries, both dependent on jQuery of course. Chuck in different sets of markup for desktop and mobile and hundreds of lines of CSS and you've got a payload that's about 250kb - just to display some images. 
@@ -22,9 +32,9 @@ Here's the manifesto:
 - Fast & small
 - Support modern browsers only (last 2 versions). No support for IE
 
-### No config
+### Minimal config
 
-Design and UX decisions are based on user research, best practices and optimisations to converts users into customers. There are no configuration options on purpose. But you can hack at it as you wish of course.
+Design and UX decisions are based on user research, best practices and optimisations to converts users into customers. There are only 2 configuration options on purpose. But you can hack at it as you wish of course.
 
 ### Accessible
 
@@ -40,4 +50,5 @@ Works in all modern browsers and web views. Nobody uses IE anymore (https://cani
 
 ### Design decisions
 
-- No slide transitions, only animating opacity
+- No slide transitions, only animating opacity. Faster, better, harder, stronger.
+
