@@ -1,3 +1,14 @@
+function throttle(f, t) {
+	let inThrottle;
+	return function(args) {
+		if(!inThrottle) {
+			f(args);
+			inThrottle = true;
+			setTimeout(() => inThrottle = false, t)
+		}
+	}
+}
+
 class Showcase {
 	constructor(el, options) {
 		if(!el) {
@@ -42,7 +53,7 @@ class Showcase {
 		}
 		
 		if(!window || !window.ResizeObserver) {
-			window.addEventListener('resize', this.onScreenResize.bind(_this));
+			window.addEventListener('resize', throttle(this.onScreenResize.bind(_this), 100));
 		}
 		else {
 			this.addResizeObserver();
