@@ -64,8 +64,8 @@ class Showcase {
 	addResizeObserver() {
 		const observer = new ResizeObserver(entries => {
 			entries.forEach(entry => {
-				this.screenWidth = window.innerWidth;
-				this.updateThumbStyles();
+				console.log('Resizing');
+				this.onScreenResize();
 			})
 		});
 		observer.observe(this.contentEl);
