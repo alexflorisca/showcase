@@ -98,8 +98,8 @@
   overflow-y: scroll;
 }
 
-.showcase__thumbs--img button,
-.showcase__thumbs--dot button {
+.showcase__thumbs button {
+  flex-shrink: 0;
   background: none;
   border: 0;
   padding: 0;
@@ -107,6 +107,10 @@
   outline: none;
   display: block;
   cursor: pointer;
+}
+
+.showcase__thumbs button.active img {
+  border: 1px solid #ccc !important
 }
 
 .showcase__thumbs--dot button {

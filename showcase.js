@@ -148,6 +148,7 @@ class Showcase {
 		if(this.thumbs.length > 0) {
 			this.thumbs[this.activeSlideIndex].classList.remove('active');
 			this.thumbs[nextSlide].classList.add('active');
+			this.thumbs[nextSlide].scrollIntoView();
 		}
 		this.activeSlideIndex = nextSlide;
 		this.slides[this.activeSlideIndex].focus();
