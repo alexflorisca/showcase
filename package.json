@@ -26,5 +26,6 @@
     "parcel-bundler": "^1.12.4",
     "sass": "^1.26.9"
   },
-  "browserslist": "> 0.25%, not dead"
+  "browserslist": "> 0.25%, not dead",
+  "dependencies": {}
 }

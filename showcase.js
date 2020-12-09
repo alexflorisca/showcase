@@ -128,7 +128,7 @@ class Showcase {
 			const b = document.createElement('button')
 			b.setAttribute('data-slide-index', index)
 			b.setAttribute('aria-label', `Image ${index+1}`)
-			b.innerHTML = `<img src="${slide.firstChild.getAttribute('src')}">`;
+			b.innerHTML = `<img src="${slide.firstElementChild.getAttribute('src')}">`;
 
 			if(index === this.activeSlideIndex) {
 				b.classList.add('active');

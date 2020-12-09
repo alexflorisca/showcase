@@ -142,13 +142,6 @@
   height: auto;
 }
 
-.showcase.showcase--thumbs-right .showcase__thumbs--img img,
-.showcase.showcase--thumbs-left .showcase__thumbs--img img {
-  width: auto;
-  height: 100%;
-}
-
-
 .showcase--grid .showcase__thumbs {
   display: none;
 }
