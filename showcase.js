@@ -106,6 +106,7 @@ class Showcase {
 
 	removeThumbs() {
 		this.el.classList.add('showcase--grid');
+		this.el.classList.remove('showcase--thumbs-right showcase--thumbs-left');
 		this.thumbsEl.classList.remove('showcase__thumbs--dot');
 		this.thumbsEl.classList.remove('showcase__thumbs--img');
 	}
