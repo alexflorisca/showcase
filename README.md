@@ -1,6 +1,7 @@
 # Showcase
 
-Showcase is a simple front-end component for displaying a bunch of images in the most optimal way for all devices. A slider on small width screens, a grid of images at biggers widths. Because why hide all your fancy images if you don't have to.
+Showcase helps you display a bunch of images in the most optimum way on all devices. A slideshow on small screens, add some thumbnails on bigger screeens and a grid of images on evern bigger screens. Because why hide all your fancy images if you don't have to.
+
 
 ## Usage
 
@@ -22,12 +23,14 @@ Markup your html as follows, include the showcase.css and showcase.js and initia
         <li class="showcase__slide"><img alt="Image 3" src="images/product-shot-3.jpg"></li>
         <li class="showcase__slide"><img alt="Image 4" src="images/product-shot-4.jpg"></li>
       </ul>
-      <button type="button" aria-label="previous" class="showcase__prev">
-        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 443.52 443.52"><path d="M143.492 221.863L336.226 29.129c6.663-6.664 6.663-17.468 0-24.132-6.665-6.662-17.468-6.662-24.132 0l-204.8 204.8c-6.662 6.664-6.662 17.468 0 24.132l204.8 204.8c6.78 6.548 17.584 6.36 24.132-.42 6.387-6.614 6.387-17.099 0-23.712L143.492 221.863z"/></svg>
-      </button>
-      <button type="button" aria-label="next" class="showcase__next">
-        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 443.52 443.52"><path d="M336.226 209.591l-204.8-204.8c-6.78-6.548-17.584-6.36-24.132.42-6.388 6.614-6.388 17.099 0 23.712l192.734 192.734-192.734 192.734c-6.663 6.664-6.663 17.468 0 24.132 6.665 6.663 17.468 6.663 24.132 0l204.8-204.8c6.663-6.665 6.663-17.468 0-24.132z"/></svg>
-      </button>
+      <div class="showcase__controls">
+        <button type="button" aria-label="previous" class="showcase__prev">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 443.52 443.52"><path d="M143.492 221.863L336.226 29.129c6.663-6.664 6.663-17.468 0-24.132-6.665-6.662-17.468-6.662-24.132 0l-204.8 204.8c-6.662 6.664-6.662 17.468 0 24.132l204.8 204.8c6.78 6.548 17.584 6.36 24.132-.42 6.387-6.614 6.387-17.099 0-23.712L143.492 221.863z"/></svg>
+        </button>
+        <button type="button" aria-label="next" class="showcase__next">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 443.52 443.52"><path d="M336.226 209.591l-204.8-204.8c-6.78-6.548-17.584-6.36-24.132.42-6.388 6.614-6.388 17.099 0 23.712l192.734 192.734-192.734 192.734c-6.663 6.664-6.663 17.468 0 24.132 6.665 6.663 17.468 6.663 24.132 0l204.8-204.8c6.663-6.665 6.663-17.468 0-24.132z"/></svg>
+        </button>
+      </div>
     </div>
     <div role="tablist" class="showcase__thumbs"></div>
   </div>

@@ -16,10 +16,12 @@ class Showcase {
 			return;
 		}
 		const _this = this;
+		this.firstRun = true;
 		this.el = el;
 		this.mainEl = el.querySelector('.showcase__main');
 		this.contentEl = el.querySelector('.showcase__content');
 		this.slides = el.querySelectorAll('.showcase__slide');
+		this.controls = el.querySelector('.showcase__controls');
 		if(!this.contentEl || this.slides.length === 0) {
 			console.warn('Invalid markup or no slides found');
 			return;
@@ -28,6 +30,7 @@ class Showcase {
 		this.screenWidth = window.innerWidth;
 		this.thumbsEl = el.querySelector('.showcase__thumbs');
 		this.thumbPos = options.thumbPosition || 'bottom';
+		this.thumbsStyle = 'dot';
 		this.thumbs = [];
 		this.xDown = null;
 		this.yDown = null;
@@ -52,19 +55,20 @@ class Showcase {
 			this.prev.addEventListener('click', this.prevSlide.bind(_this));
 		}
 		
-		if(!window || !window.ResizeObserver) {
-			window.addEventListener('resize', throttle(this.onScreenResize.bind(_this), 100));
+		if(this.slides.length > 1) {
+			if(!window || !window.ResizeObserver) {
+				window.addEventListener('resize', throttle(this.onScreenResize.bind(_this), 100));
+			}
+			else {
+				this.addResizeObserver();
+			}
+			this.addThumbs();
 		}
-		else {
-			this.addResizeObserver();
-		}
-		this.addThumbs();
 	}
 
 	addResizeObserver() {
 		const observer = new ResizeObserver(entries => {
 			entries.forEach(entry => {
-				console.log('Resizing');
 				this.onScreenResize();
 			})
 		});
@@ -77,9 +81,11 @@ class Showcase {
 	}
 
 	setImageThumbs() {
+		this.thumbsStyle = 'img';
 		this.el.classList.remove('showcase--grid');
 		this.thumbsEl.classList.remove('showcase__thumbs--dot');
 		this.thumbsEl.classList.add('showcase__thumbs--img');
+		this.controls.style.display = 'block';
 
 		if(this.thumbPos === 'right') {
 			this.thumbsEl.style.height = `${this.contentEl.offsetHeight}px`;
@@ -93,6 +99,7 @@ class Showcase {
 	}
 
 	setDotThumbs() {
+		this.thumbsStyle = 'dot';
 		Array.from(this.thumbsEl.children).forEach(child => {
 			child.style.width = null;
 		})
@@ -102,13 +109,17 @@ class Showcase {
 		this.thumbsEl.classList.remove('showcase__thumbs--img');
 		this.thumbsEl.classList.add('showcase__thumbs--dot');
 		this.thumbsEl.style.removeProperty('height');
+		this.controls.style.display = 'block';
 	}
 
-	removeThumbs() {
+	setNoThumbs() {
+		this.thumbsStyle = 'none';
 		this.el.classList.add('showcase--grid');
 		this.el.classList.remove('showcase--thumbs-right', 'showcase--thumbs-left');
 		this.thumbsEl.classList.remove('showcase__thumbs--dot');
 		this.thumbsEl.classList.remove('showcase__thumbs--img');
+		this.controls.style.display = 'none';
+
 	}
 
 	updateThumbStyles() {
@@ -120,7 +131,7 @@ class Showcase {
 			this.setImageThumbs();
 		// no thumbnails on big screens
 		} else {
-			this.removeThumbs();
+			this.setNoThumbs();
 		}
 	}
 
@@ -149,7 +160,10 @@ class Showcase {
 		if(this.thumbs.length > 0) {
 			this.thumbs[this.activeSlideIndex].classList.remove('active');
 			this.thumbs[nextSlide].classList.add('active');
-			this.thumbs[nextSlide].scrollIntoView({ block: 'nearest' });
+			// Scroll thumbnail images into view
+			if(this.thumbsStyle === 'img') {
+				this.thumbs[nextSlide].scrollIntoView({ block: 'nearest' });
+			}
 		}
 		this.activeSlideIndex = nextSlide;
 		this.slides[this.activeSlideIndex].focus();

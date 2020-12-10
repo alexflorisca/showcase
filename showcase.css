@@ -5,11 +5,13 @@
 }
 
 .showcase.showcase--thumbs-left {
-  grid-template-columns: 15% 85%;
+  grid-template-columns: 14.5% 84.5%;
+  grid-gap: 1%;
 }
 
 .showcase.showcase--thumbs-right {
-  grid-template-columns: 85% 15%;
+  grid-template-columns: 84.5% 14.5%;
+  grid-gap: 1%;
 }
 
 .showcase__main {
@@ -46,6 +48,9 @@
   opacity: 1;
 }
 
+.showcase--grid .showcase__controls {
+  display: none;
+}
 .showcase__prev,
 .showcase__next {
   width: 6%;
@@ -148,8 +153,8 @@
 .showcase--grid .showcase__thumbs {
   display: none;
 }
-.showcase--grid .showcase__prev,
-.showcase--grid .showcase__next,
+
+.showcase--grid .showcase__controls,
 .showcase--grid .showcase__dots {
   display: none;
 }
