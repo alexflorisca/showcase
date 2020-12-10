@@ -2,20 +2,21 @@
 
 Showcase helps you display a bunch of images in the most optimum way on all devices. A slideshow on small screens, add some thumbnails on bigger screeens and a grid of images on evern bigger screens. Because why hide all your fancy images if you don't have to.
 
+![](https://raw.githubusercontent.com/alexflorisca/showcase/master/images/demo.gif)
+
 
 ## Usage
 
-Markup your html as follows, include the showcase.css and showcase.js and initialise
+Markup your html as follows, include the showcase.css and showcase.js (or showcase.min.js) and initialise
 
 ```html
-
 <head>
   ...
   <link rel="stylesheet" href="showcase.css">
 </head>
 <body>
   ...
-  <div id="showcase" class="showcase">
+  <div id="showcase-demo" class="showcase">
     <div class="showcase__main">
       <ul class="showcase__content" aria-label="Image slideshow. Press left or right arrow to navigate" tabindex="0">
         <li class="showcase__slide"><img alt="Image 1" src="images/product-shot-1.jpg"></li>
@@ -24,6 +25,7 @@ Markup your html as follows, include the showcase.css and showcase.js and initia
         <li class="showcase__slide"><img alt="Image 4" src="images/product-shot-4.jpg"></li>
       </ul>
       <div class="showcase__controls">
+        <!-- You can include your own next/prev buttons, just make sure they have the `showcase__prev` and `showcase__next` classes -->
         <button type="button" aria-label="previous" class="showcase__prev">
           <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 443.52 443.52"><path d="M143.492 221.863L336.226 29.129c6.663-6.664 6.663-17.468 0-24.132-6.665-6.662-17.468-6.662-24.132 0l-204.8 204.8c-6.662 6.664-6.662 17.468 0 24.132l204.8 204.8c6.78 6.548 17.584 6.36 24.132-.42 6.387-6.614 6.387-17.099 0-23.712L143.492 221.863z"/></svg>
         </button>
@@ -37,7 +39,7 @@ Markup your html as follows, include the showcase.css and showcase.js and initia
   <script src="showcase.js"></script>
   <!-- Initialise showcase on an element -->
   <script>
-    const showcase = new Showcase(document.getElementById('showcase'), {
+    const showcase = new Showcase(document.getElementById('showcase-demo'), {
       breakpoints: [740, 1200],
       thumbPosition: 'bottom'
     });
@@ -48,7 +50,7 @@ Markup your html as follows, include the showcase.css and showcase.js and initia
 ## Options
 
 **`breakpoints`** - Array(2). 2 breakpoints for mobile - tablet and tablet - desktop thresholds
-**`thumbPosition`** - String('bottom' | 'right' | 'left') - Where should the thumbnails live?
+**`thumbPosition`** - String('bottom' | 'right' | 'left') - Where should the thumbnails live relative to the main image?
 
 ## Why?
 
@@ -65,8 +67,8 @@ Here's the manifesto:
 - Provide the best UX for showcasing something on any device
 - Encourage best practice through minimum options
 - Accessible
-- Fast & small
-- Support modern browsers only (last 2 versions). No support for IE
+- Fast & small (no slide transitions on purpose!)
+- Support modern browsers only (last 2 versions). No support for IE.
 
 ### Minimal config
 
@@ -83,8 +85,4 @@ Performance was a key driver for this project, so I'm keeping it purposefully sm
 ### Modern browsers
 
 Works in all modern browsers and web views. Nobody uses IE anymore (https://caniuse.com/usage-table). 1.42% are on IE11 and Microsoft is trying hard to get people off it. So no polyfills, no hacks, just clean code.
-
-### Design decisions
-
-- No slide transitions, only animating opacity. Faster, better, harder, stronger.
 
