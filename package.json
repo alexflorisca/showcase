@@ -1,11 +1,11 @@
 {
-  "name": "showcase",
+  "name": "media-showcase",
   "version": "0.0.0",
-  "description": "A simple UI component for showcasing images with the best UI for each device",
-  "main": "showcase.js",
+  "description": "A simple UI component for showcasing images or videos with the best UX for each device",
+  "browser": "showcase.js",
   "scripts": {
     "start": "parcel index.html",
-    "build": "babel showcase.js --out-file showcase.min.js"
+    "build": "babel showcase.js --out-file public/showcase.min.js && minify showcase.css > public/showcase.min.css"
   },
   "repository": {
     "type": "git",
@@ -20,11 +20,11 @@
   "devDependencies": {
     "@babel/cli": "^7.10.4",
     "@babel/core": "^7.10.4",
+    "@babel/polyfill": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "babel-preset-minify": "^0.5.1",
-    "@babel/polyfill": "^7.10.4",
-    "parcel-bundler": "^1.12.4",
-    "sass": "^1.26.9"
+    "minify": "^6.0.1",
+    "parcel-bundler": "^1.12.4"
   },
   "browserslist": "> 0.25%, not dead",
   "dependencies": {}
