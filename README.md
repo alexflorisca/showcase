@@ -82,6 +82,9 @@ The demo markup includes best practices for accessibility. You can also focus on
 
 Performance was a key driver for this project, so I'm keeping it purposefully small and include only the bare essentials
 
+showcase.min.js ~ 2.3kb gziped
+showcase.min.css ~ 
+
 ### Modern browsers
 
 Works in all modern browsers and web views. Nobody uses IE anymore (https://caniuse.com/usage-table). 1.42% are on IE11 and Microsoft is trying hard to get people off it. So no polyfills, no hacks, just clean code.
