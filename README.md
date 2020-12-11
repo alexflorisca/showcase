@@ -82,8 +82,8 @@ The demo markup includes best practices for accessibility. You can also focus on
 
 Performance was a key driver for this project, so I'm keeping it purposefully small and include only the bare essentials
 
-showcase.min.js ~ 2.3kb gziped
-showcase.min.css ~ 
+showcase.min.js ~ **2.3kb** gziped
+showcase.min.css ~ **1.7kb** gzipped
 
 ### Modern browsers
 
