@@ -1,0 +1,3 @@
+dist/*
+.cache/*
+babel.config.json

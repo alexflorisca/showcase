@@ -12,7 +12,8 @@ Markup your html as follows, include the showcase.css and showcase.js (or showca
 ```html
 <head>
   ...
-  <link rel="stylesheet" href="showcase.css">
+  <!-- Include showcase css -->
+  <link rel="stylesheet" href="https://unpkg.com/media-showcase@1.0.0/public/showcase.min.css">
 </head>
 <body>
   ...
@@ -36,7 +37,8 @@ Markup your html as follows, include the showcase.css and showcase.js (or showca
     </div>
     <div role="tablist" class="showcase__thumbs"></div>
   </div>
-  <script src="showcase.js"></script>
+  <!-- Include showcase js -->
+  <script src="https://unpkg.com/media-showcase@1.0.0/public/showcase.min.js"></script>
   <!-- Initialise showcase on an element -->
   <script>
     const showcase = new Showcase(document.getElementById('showcase-demo'), {

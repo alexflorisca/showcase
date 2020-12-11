@@ -1,6 +1,6 @@
 {
   "name": "media-showcase",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A simple UI component for showcasing images or videos with the best UX for each device",
   "browser": "showcase.js",
   "scripts": {
