@@ -26,7 +26,7 @@ class Showcase {
 			console.warn('Invalid markup or no slides found');
 			return;
 		}
-		this.breakpoints = options.breakpoints || [600, 1200];
+		this.breakpoints = options.breakpoints;
 		this.screenWidth = window.innerWidth;
 		this.thumbsEl = el.querySelector('.showcase__thumbs');
 		this.thumbPos = options.thumbPosition || 'bottom';
@@ -119,19 +119,21 @@ class Showcase {
 		this.thumbsEl.classList.remove('showcase__thumbs--dot');
 		this.thumbsEl.classList.remove('showcase__thumbs--img');
 		this.controls.style.display = 'none';
-
 	}
 
 	updateThumbStyles() {
 		// dotted thumbnails on small screens
-		if(this.screenWidth < this.breakpoints[0]) {
-			this.setDotThumbs();
-		// image thumbnails on medium screens
-		} else if(this.screenWidth > this.breakpoints[0] && this.screenWidth < this.breakpoints[1]) {
-			this.setImageThumbs();
-		// no thumbnails on big screens
-		} else {
+		if(this.breakpoints[1] && this.screenWidth > this.breakpoints[1]) {
 			this.setNoThumbs();
+			return;
+		}
+		// image thumbnails on medium screens
+		else if(this.screenWidth > this.breakpoints[0]) {
+			this.setImageThumbs();
+		} 
+		// no thumbnails on big screens
+		else {
+			this.setDotThumbs();
 		}
 	}
 
